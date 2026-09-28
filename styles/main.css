@@ -1,0 +1,20 @@
+:root {
+    /* Backgrounds */
+    --color-bg: #1A1733;
+    --color-panel: #292653;
+    --color-panel-highlight: #3E3A70;
+
+    /* Accents */
+    --color-primary: #6C5FC7;
+    --color-blue: #4A90D9;
+    --color-cyan: #5ED7C6;
+    --color-gold: #F2C14E;
+    --color-warm: #E8874F;
+
+    /* Text */
+    --color-text: #FFF4D6;
+    --color-text-muted: #B8B5C9;
+
+    /* UI */
+    --color-outline: #0D0B1E;
+}
