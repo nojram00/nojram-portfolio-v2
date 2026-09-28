@@ -15,9 +15,7 @@ export class AppNav extends BaseElement {
                 const el = document.createElement('div');
                 el.classList.add('nav-item');
                 el.innerText = navItem;
-                el.addEventListener('click', function() {
-                    document.getElementById(`nav-item-${id}`)?.scrollIntoView();
-                });
+                el.setAttribute('data-target', `nav-item-${id}`);
                 return el;
             })();
             id++;
@@ -31,6 +29,10 @@ export class AppNav extends BaseElement {
                 display: flex;
                 flex-direction: row;
                 gap: 12px;
+            }
+
+            .nav-item {
+                cursor: pointer;
             }
         `
     }
@@ -46,6 +48,12 @@ export class AppNav extends BaseElement {
         const nav = element.querySelector('nav');
         for (const navItem of this.navItemElements()) {
             nav?.append(navItem);
+            navItem.addEventListener('click', function(e) {
+                const target = navItem.getAttribute('data-target');
+                if (target) {
+                    document.getElementById(target)?.scrollIntoView();
+                }
+            })
         }
     }
 }

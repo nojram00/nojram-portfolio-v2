@@ -67,9 +67,7 @@ var AppNav = class extends BaseElement {
         const el = document.createElement("div");
         el.classList.add("nav-item");
         el.innerText = navItem;
-        el.addEventListener("click", function() {
-          document.getElementById(`nav-item-${id}`)?.scrollIntoView();
-        });
+        el.setAttribute("data-target", `nav-item-${id}`);
         return el;
       })();
       id++;
@@ -83,6 +81,10 @@ var AppNav = class extends BaseElement {
                 flex-direction: row;
                 gap: 12px;
             }
+
+            .nav-item {
+                cursor: pointer;
+            }
         `;
   }
   get template() {
@@ -95,6 +97,12 @@ var AppNav = class extends BaseElement {
     const nav = element.querySelector("nav");
     for (const navItem of this.navItemElements()) {
       nav?.append(navItem);
+      navItem.addEventListener("click", function(e) {
+        const target = navItem.getAttribute("data-target");
+        if (target) {
+          document.getElementById(target)?.scrollIntoView();
+        }
+      });
     }
   }
 };
