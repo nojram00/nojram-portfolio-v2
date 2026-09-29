@@ -4,7 +4,7 @@ export class AppNav extends BaseElement {
 
     private navItems = [
         'About',
-        'Services',
+        'Projects',
         'Contact Me'
     ]
 

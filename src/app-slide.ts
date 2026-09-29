@@ -1,48 +1,26 @@
 import { BaseElement } from "./base";
 import { clamp } from "./utils/clamp";
 
-interface SlideData {
+export interface SlideData {
     header : string;
     content: string;
 }
 
-class SlideDataFactory implements SlideData {
+export class SlideDataFactory implements SlideData {
     constructor(
         public header: string,
         public content: string
     ) {}
+
+    static create(header : string, content : string) : SlideData {
+        return new SlideDataFactory(header, content)
+    }
 }
 
-export class AppSlide extends BaseElement {
+export abstract class AppSlide extends BaseElement {
 
-    private slideData : SlideData[] = [
-        this.generateSlideData(
-            'Personal Information',
-            `
-                <ul>
-                    <li>
-                        <span style="font-weight: bold;">Name: </span> 
-                        <span>Marjon Godito</span>
-                    </li>
-                    <li>
-                        <span style="font-weight: bold;">Name: </span> 
-                        <span>Marjon Godito</span>
-                    </li>
-                </ul>
-            `
-        ),
-        this.generateSlideData(
-            'Education',
-            "Graduate in Bachelor of Science and Technology at Pamatasan ng Lungsod ng Valenzuela."
-        ),
-        this.generateSlideData(
-            'Work Experience',
-            "Formerly worked at ..."
-        )
-    ]
-
-    private generateSlideData(header : string, content : string) : SlideData {
-        return new SlideDataFactory(header, content);
+    protected get slideData() : SlideData[] {
+        return []
     }
 
     private *slides() : Generator<HTMLElement, null> {
@@ -69,7 +47,6 @@ export class AppSlide extends BaseElement {
 
         return null;
     }
-
 
     protected override get template() {
         return `
@@ -120,6 +97,7 @@ export class AppSlide extends BaseElement {
                 width: 100%;
                 height: 100%;
                 min-height: 300px;
+                margin: 0 50px;
 
                 box-sizing: border-box;
             }
@@ -221,8 +199,8 @@ export class AppSlide extends BaseElement {
                 align-items: center;
                 justify-content: center;
 
-                background: rgba(0, 0, 0, 0.5);
-                color: white;
+                background: rgba(0, 0, 0, 0.25);
+                color: rgba(255, 255, 255, 0.5);
 
                 transition:
                     background 150ms ease,

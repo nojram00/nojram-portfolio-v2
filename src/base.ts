@@ -10,11 +10,11 @@ export abstract class BaseElement extends HTMLElement {
     }
 
     protected get css() : string {
-        return ''
+        return '';
     }
 
     protected get template() : string {
-        return ''
+        return '';
     }
 
     protected onInitialize(element : ShadowRoot) : void {}
@@ -25,10 +25,10 @@ export abstract class BaseElement extends HTMLElement {
             ${this.template}
         `;
 
-        this.onInitialize(this.shadow)
+        this.onInitialize(this.shadow);
     }
 
     connectedCallback() {
-        this.initialize()
+        this.initialize();
     }
 }

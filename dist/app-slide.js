@@ -1,18 +1,7 @@
-"use strict";var l=Object.defineProperty;var g=Object.getOwnPropertyDescriptor;var m=Object.getOwnPropertyNames;var u=Object.prototype.hasOwnProperty;var v=(o,e)=>{for(var t in e)l(o,t,{get:e[t],enumerable:!0})},x=(o,e,t,i)=>{if(e&&typeof e=="object"||typeof e=="function")for(let r of m(e))!u.call(o,r)&&r!==t&&l(o,r,{get:()=>e[r],enumerable:!(i=g(e,r))||i.enumerable});return o};var f=o=>x(l({},"__esModule",{value:!0}),o);var w={};v(w,{AppSlide:()=>h});module.exports=f(w);var a=class extends HTMLElement{shadow;constructor(){super(),this.shadow=this.attachShadow({mode:"open"})}get css(){return""}get template(){return""}onInitialize(e){}initialize(){this.shadow.innerHTML=`
+"use strict";var d=Object.defineProperty;var m=Object.getOwnPropertyDescriptor;var v=Object.getOwnPropertyNames;var g=Object.prototype.hasOwnProperty;var u=(o,e)=>{for(var t in e)d(o,t,{get:e[t],enumerable:!0})},x=(o,e,t,i)=>{if(e&&typeof e=="object"||typeof e=="function")for(let r of v(e))!g.call(o,r)&&r!==t&&d(o,r,{get:()=>e[r],enumerable:!(i=m(e,r))||i.enumerable});return o};var f=o=>x(d({},"__esModule",{value:!0}),o);var w={};u(w,{AppSlide:()=>h,SlideDataFactory:()=>c});module.exports=f(w);var s=class extends HTMLElement{shadow;constructor(){super(),this.shadow=this.attachShadow({mode:"open"})}get css(){return""}get template(){return""}onInitialize(e){}initialize(){this.shadow.innerHTML=`
             <style>${this.css}</style>
             ${this.template}
-        `,this.onInitialize(this.shadow)}connectedCallback(){this.initialize()}};var d=(o,e,t)=>Math.max(o,Math.min(e,t));var c=class{constructor(e,t){this.header=e;this.content=t}header;content},h=class extends a{slideData=[this.generateSlideData("Personal Information",`
-                <ul>
-                    <li>
-                        <span style="font-weight: bold;">Name: </span> 
-                        <span>Marjon Godito</span>
-                    </li>
-                    <li>
-                        <span style="font-weight: bold;">Name: </span> 
-                        <span>Marjon Godito</span>
-                    </li>
-                </ul>
-            `),this.generateSlideData("Education","Graduate in Bachelor of Science and Technology at Pamatasan ng Lungsod ng Valenzuela."),this.generateSlideData("Work Experience","Formerly worked at ...")];generateSlideData(e,t){return new c(e,t)}*slides(){let e=0;for(let t of this.slideData){let i=document.createElement("div");i.innerHTML=`
+        `,this.onInitialize(this.shadow)}connectedCallback(){this.initialize()}};var l=(o,e,t)=>Math.max(o,Math.min(e,t));var c=class o{constructor(e,t){this.header=e;this.content=t}header;content;static create(e,t){return new o(e,t)}},h=class extends s{get slideData(){return[]}*slides(){let e=0;for(let t of this.slideData){let i=document.createElement("div");i.innerHTML=`
                 <div class="header">
                     ${t.header}
                 </div>
@@ -63,6 +52,7 @@
                 width: 100%;
                 height: 100%;
                 min-height: 300px;
+                margin: 0 50px;
 
                 box-sizing: border-box;
             }
@@ -164,8 +154,8 @@
                 align-items: center;
                 justify-content: center;
 
-                background: rgba(0, 0, 0, 0.5);
-                color: white;
+                background: rgba(0, 0, 0, 0.25);
+                color: rgba(255, 255, 255, 0.5);
 
                 transition:
                     background 150ms ease,
@@ -213,4 +203,4 @@
             #slide-viewport .btn:active {
                 transform: translateY(-50%) scale(0.95);
             }
-        `}onInitialize(e){let t=e.querySelector("#slide-container");if(!t)return;for(let n of this.slides())t.append(n);let i=Array.from(t.querySelectorAll(".slide-item")),r=-1,s=n=>{i.length!==0&&(n<0&&(n=i.length-1),n>=i.length&&(n=0),n!==r&&(i[r]?.removeAttribute("data-active"),r=n,i[r]?.setAttribute("data-active","")))},p=e.querySelector(".btn-prev"),b=e.querySelector(".btn-next");p?.addEventListener("click",()=>{let n=d(0,i.length-1,r-1);console.log("Prev: ",n),s(n)}),b?.addEventListener("click",()=>{let n=d(0,i.length-1,r+1);console.log("Next: ",n),s(n)}),s(0)}};0&&(module.exports={AppSlide});
+        `}onInitialize(e){let t=e.querySelector("#slide-container");if(!t)return;for(let n of this.slides())t.append(n);let i=Array.from(t.querySelectorAll(".slide-item")),r=-1,a=n=>{i.length!==0&&(n<0&&(n=i.length-1),n>=i.length&&(n=0),n!==r&&(i[r]?.removeAttribute("data-active"),r=n,i[r]?.setAttribute("data-active","")))},p=e.querySelector(".btn-prev"),b=e.querySelector(".btn-next");p?.addEventListener("click",()=>{let n=l(0,i.length-1,r-1);console.log("Prev: ",n),a(n)}),b?.addEventListener("click",()=>{let n=l(0,i.length-1,r+1);console.log("Next: ",n),a(n)}),a(0)}};0&&(module.exports={AppSlide,SlideDataFactory});
