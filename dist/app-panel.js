@@ -1,62 +1,7 @@
-"use strict";
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-// src/app-panel.ts
-var app_panel_exports = {};
-__export(app_panel_exports, {
-  AppPanel: () => AppPanel
-});
-module.exports = __toCommonJS(app_panel_exports);
-
-// src/base.ts
-var BaseElement = class extends HTMLElement {
-  shadow;
-  constructor() {
-    super();
-    this.shadow = this.attachShadow({
-      mode: "open"
-    });
-  }
-  get css() {
-    return "";
-  }
-  get template() {
-    return "";
-  }
-  onInitialize(element) {
-  }
-  initialize() {
-    this.shadow.innerHTML = `
+"use strict";var a=Object.defineProperty;var d=Object.getOwnPropertyDescriptor;var l=Object.getOwnPropertyNames;var p=Object.prototype.hasOwnProperty;var c=(t,e)=>{for(var i in e)a(t,i,{get:e[i],enumerable:!0})},h=(t,e,i,s)=>{if(e&&typeof e=="object"||typeof e=="function")for(let o of l(e))!p.call(t,o)&&o!==i&&a(t,o,{get:()=>e[o],enumerable:!(s=d(e,o))||s.enumerable});return t};var x=t=>h(a({},"__esModule",{value:!0}),t);var g={};c(g,{AppPanel:()=>n});module.exports=x(g);var r=class extends HTMLElement{shadow;constructor(){super(),this.shadow=this.attachShadow({mode:"open"})}get css(){return""}get template(){return""}onInitialize(e){}initialize(){this.shadow.innerHTML=`
             <style>${this.css}</style>
             ${this.template}
-        `;
-    this.onInitialize(this.shadow);
-  }
-  connectedCallback() {
-    this.initialize();
-  }
-};
-
-// src/app-panel.ts
-var AppPanel = class extends BaseElement {
-  get css() {
-    return `
+        `,this.onInitialize(this.shadow)}connectedCallback(){this.initialize()}};var n=class extends r{get css(){return`
             :host {
                 box-sizing: border-box;
                 display: flex;
@@ -102,10 +47,7 @@ var AppPanel = class extends BaseElement {
                 color: var(--color-text);
                 background: var(--color-panel);
             }
-        `;
-  }
-  get template() {
-    return `
+        `}get template(){return`
             <div class="panel">
                 <div class="panel-header">
                     <slot name="header"></slot>
@@ -114,10 +56,4 @@ var AppPanel = class extends BaseElement {
                     <slot></slot>
                 </div>
             </div>
-        `;
-  }
-};
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {
-  AppPanel
-});
+        `}};0&&(module.exports={AppPanel});

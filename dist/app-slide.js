@@ -1,116 +1,31 @@
-"use strict";
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-// src/app-slide.ts
-var app_slide_exports = {};
-__export(app_slide_exports, {
-  AppSlide: () => AppSlide
-});
-module.exports = __toCommonJS(app_slide_exports);
-
-// src/base.ts
-var BaseElement = class extends HTMLElement {
-  shadow;
-  constructor() {
-    super();
-    this.shadow = this.attachShadow({
-      mode: "open"
-    });
-  }
-  get css() {
-    return "";
-  }
-  get template() {
-    return "";
-  }
-  onInitialize(element) {
-  }
-  initialize() {
-    this.shadow.innerHTML = `
+"use strict";var l=Object.defineProperty;var g=Object.getOwnPropertyDescriptor;var m=Object.getOwnPropertyNames;var u=Object.prototype.hasOwnProperty;var v=(o,e)=>{for(var t in e)l(o,t,{get:e[t],enumerable:!0})},x=(o,e,t,i)=>{if(e&&typeof e=="object"||typeof e=="function")for(let r of m(e))!u.call(o,r)&&r!==t&&l(o,r,{get:()=>e[r],enumerable:!(i=g(e,r))||i.enumerable});return o};var f=o=>x(l({},"__esModule",{value:!0}),o);var w={};v(w,{AppSlide:()=>h});module.exports=f(w);var a=class extends HTMLElement{shadow;constructor(){super(),this.shadow=this.attachShadow({mode:"open"})}get css(){return""}get template(){return""}onInitialize(e){}initialize(){this.shadow.innerHTML=`
             <style>${this.css}</style>
             ${this.template}
-        `;
-    this.onInitialize(this.shadow);
-  }
-  connectedCallback() {
-    this.initialize();
-  }
-};
-
-// src/utils/clamp.ts
-var clamp = (min, max, value) => {
-  return Math.max(min, Math.min(max, value));
-};
-
-// src/app-slide.ts
-var SlideDataFactory = class {
-  constructor(header, content) {
-    this.header = header;
-    this.content = content;
-  }
-  header;
-  content;
-};
-var AppSlide = class extends BaseElement {
-  slideData = [
-    this.generateSlideData(
-      "Education",
-      "Graduate at ..."
-    ),
-    this.generateSlideData(
-      "Work Experience",
-      "Formerly worked at ..."
-    )
-  ];
-  generateSlideData(header, content) {
-    return new SlideDataFactory(header, content);
-  }
-  *slides() {
-    let slideIdx = 0;
-    for (const data of this.slideData) {
-      const element = document.createElement("div");
-      element.innerHTML = `
+        `,this.onInitialize(this.shadow)}connectedCallback(){this.initialize()}};var d=(o,e,t)=>Math.max(o,Math.min(e,t));var c=class{constructor(e,t){this.header=e;this.content=t}header;content},h=class extends a{slideData=[this.generateSlideData("Personal Information",`
+                <ul>
+                    <li>
+                        <span style="font-weight: bold;">Name: </span> 
+                        <span>Marjon Godito</span>
+                    </li>
+                    <li>
+                        <span style="font-weight: bold;">Name: </span> 
+                        <span>Marjon Godito</span>
+                    </li>
+                </ul>
+            `),this.generateSlideData("Education","Graduate in Bachelor of Science and Technology at Pamatasan ng Lungsod ng Valenzuela."),this.generateSlideData("Work Experience","Formerly worked at ...")];generateSlideData(e,t){return new c(e,t)}*slides(){let e=0;for(let t of this.slideData){let i=document.createElement("div");i.innerHTML=`
                 <div class="header">
-                    ${data.header}
+                    ${t.header}
                 </div>
                 <div class="body">
-                    ${data.content}
+                    ${t.content}
                 </div>
-            `;
-      element.id = `slide-${slideIdx}`;
-      element.classList.add("slide-item");
-      slideIdx++;
-      yield element;
-    }
-    return null;
-  }
-  get template() {
-    return `
+            `,i.id=`slide-${e}`,i.classList.add("slide-item"),e++,yield i}return null}get template(){return`
             <div id="slide-viewport">
                 <button class="btn-prev btn"></button>
                 <div id="slide-container"></div>
                 <button class="btn-next btn"></button>
             </div>
-        `;
-  }
-  get css() {
-    return `
+        `}get css(){return`
             :host {
                 display: block;
 
@@ -298,47 +213,4 @@ var AppSlide = class extends BaseElement {
             #slide-viewport .btn:active {
                 transform: translateY(-50%) scale(0.95);
             }
-        `;
-  }
-  onInitialize(element) {
-    const slideContainer = element.querySelector("#slide-container");
-    if (!slideContainer) return;
-    for (const slideItem of this.slides()) {
-      slideContainer.append(slideItem);
-    }
-    const slides = Array.from(
-      slideContainer.querySelectorAll(".slide-item")
-    );
-    let currentIdx = -1;
-    const showSlide = (idx) => {
-      if (slides.length === 0) return;
-      if (idx < 0) {
-        idx = slides.length - 1;
-      }
-      if (idx >= slides.length) {
-        idx = 0;
-      }
-      if (idx === currentIdx) return;
-      slides[currentIdx]?.removeAttribute("data-active");
-      currentIdx = idx;
-      slides[currentIdx]?.setAttribute("data-active", "");
-    };
-    const prevBtn = element.querySelector(".btn-prev");
-    const nextBtn = element.querySelector(".btn-next");
-    prevBtn?.addEventListener("click", () => {
-      const clampedIdx = clamp(0, slides.length - 1, currentIdx - 1);
-      console.log("Prev: ", clampedIdx);
-      showSlide(clampedIdx);
-    });
-    nextBtn?.addEventListener("click", () => {
-      const clampedIdx = clamp(0, slides.length - 1, currentIdx + 1);
-      console.log("Next: ", clampedIdx);
-      showSlide(clampedIdx);
-    });
-    showSlide(0);
-  }
-};
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {
-  AppSlide
-});
+        `}onInitialize(e){let t=e.querySelector("#slide-container");if(!t)return;for(let n of this.slides())t.append(n);let i=Array.from(t.querySelectorAll(".slide-item")),r=-1,s=n=>{i.length!==0&&(n<0&&(n=i.length-1),n>=i.length&&(n=0),n!==r&&(i[r]?.removeAttribute("data-active"),r=n,i[r]?.setAttribute("data-active","")))},p=e.querySelector(".btn-prev"),b=e.querySelector(".btn-next");p?.addEventListener("click",()=>{let n=d(0,i.length-1,r-1);console.log("Prev: ",n),s(n)}),b?.addEventListener("click",()=>{let n=d(0,i.length-1,r+1);console.log("Next: ",n),s(n)}),s(0)}};0&&(module.exports={AppSlide});

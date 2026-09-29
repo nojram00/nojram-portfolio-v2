@@ -17,8 +17,23 @@ export class AppSlide extends BaseElement {
 
     private slideData : SlideData[] = [
         this.generateSlideData(
+            'Personal Information',
+            `
+                <ul>
+                    <li>
+                        <span style="font-weight: bold;">Name: </span> 
+                        <span>Marjon Godito</span>
+                    </li>
+                    <li>
+                        <span style="font-weight: bold;">Name: </span> 
+                        <span>Marjon Godito</span>
+                    </li>
+                </ul>
+            `
+        ),
+        this.generateSlideData(
             'Education',
-            "Graduate at ..."
+            "Graduate in Bachelor of Science and Technology at Pamatasan ng Lungsod ng Valenzuela."
         ),
         this.generateSlideData(
             'Work Experience',

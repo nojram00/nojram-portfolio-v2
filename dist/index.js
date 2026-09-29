@@ -1,38 +1,7 @@
-"use strict";
-
-// src/base.ts
-var BaseElement = class extends HTMLElement {
-  shadow;
-  constructor() {
-    super();
-    this.shadow = this.attachShadow({
-      mode: "open"
-    });
-  }
-  get css() {
-    return "";
-  }
-  get template() {
-    return "";
-  }
-  onInitialize(element) {
-  }
-  initialize() {
-    this.shadow.innerHTML = `
+"use strict";var n=class extends HTMLElement{shadow;constructor(){super(),this.shadow=this.attachShadow({mode:"open"})}get css(){return""}get template(){return""}onInitialize(t){}initialize(){this.shadow.innerHTML=`
             <style>${this.css}</style>
             ${this.template}
-        `;
-    this.onInitialize(this.shadow);
-  }
-  connectedCallback() {
-    this.initialize();
-  }
-};
-
-// src/app-root.ts
-var Approot = class extends BaseElement {
-  get css() {
-    return `
+        `,this.onInitialize(this.shadow)}connectedCallback(){this.initialize()}};var d=class extends n{get css(){return`
             :host {
                 display: block;
                 width: 100%;
@@ -55,21 +24,11 @@ var Approot = class extends BaseElement {
                     padding: 8px;
                 }
             }
-        `;
-  }
-  get template() {
-    return `
+        `}get template(){return`
             <div class="root-container">
                 <slot></slot>
             </div>
-        `;
-  }
-};
-
-// src/app-header.ts
-var AppHeader = class extends BaseElement {
-  get css() {
-    return `
+        `}};var l=class extends n{get css(){return`
             .header {
                 box-sizing: border-box;
                 max-width: 100vw;
@@ -85,41 +44,13 @@ var AppHeader = class extends BaseElement {
             .space {
                 flex: 1;
             }
-        `;
-  }
-  get template() {
-    return `
+        `}get template(){return`
             <div class="header">
                 <div class="logo">NojramPortfolio</div>
                 <div class="space"></div>
                 <app-nav></app-nav>
             </div>
-        `;
-  }
-};
-
-// src/app-nav.ts
-var AppNav = class extends BaseElement {
-  navItems = [
-    "About",
-    "Services",
-    "Contact Me"
-  ];
-  *navItemElements() {
-    let id = 1;
-    for (const navItem of this.navItems) {
-      yield (function() {
-        const el = document.createElement("div");
-        el.classList.add("nav-item");
-        el.innerText = navItem;
-        el.setAttribute("data-target", `nav-item-${id}`);
-        return el;
-      })();
-      id++;
-    }
-  }
-  get css() {
-    return `
+        `}};var c=class extends n{navItems=["About","Services","Contact Me"];*navItemElements(){let t=1;for(let i of this.navItems)yield(function(){let e=document.createElement("div");return e.classList.add("nav-item"),e.innerText=i,e.setAttribute("data-target",`nav-item-${t}`),e})(),t++}get css(){return`
             nav {
                 color: var(--color-primary);
                 display: flex;
@@ -130,32 +61,10 @@ var AppNav = class extends BaseElement {
             .nav-item {
                 cursor: pointer;
             }
-        `;
-  }
-  get template() {
-    return `
+        `}get template(){return`
             <nav>
             </nav>
-        `;
-  }
-  onInitialize(element) {
-    const nav = element.querySelector("nav");
-    for (const navItem of this.navItemElements()) {
-      nav?.append(navItem);
-      navItem.addEventListener("click", function(e) {
-        const target = navItem.getAttribute("data-target");
-        if (target) {
-          document.getElementById(target)?.scrollIntoView();
-        }
-      });
-    }
-  }
-};
-
-// src/app-panel.ts
-var AppPanel = class extends BaseElement {
-  get css() {
-    return `
+        `}onInitialize(t){let i=t.querySelector("nav");for(let e of this.navItemElements())i?.append(e),e.addEventListener("click",function(a){let s=e.getAttribute("data-target");s&&document.getElementById(s)?.scrollIntoView()})}};var p=class extends n{get css(){return`
             :host {
                 box-sizing: border-box;
                 display: flex;
@@ -201,10 +110,7 @@ var AppPanel = class extends BaseElement {
                 color: var(--color-text);
                 background: var(--color-panel);
             }
-        `;
-  }
-  get template() {
-    return `
+        `}get template(){return`
             <div class="panel">
                 <div class="panel-header">
                     <slot name="header"></slot>
@@ -213,68 +119,31 @@ var AppPanel = class extends BaseElement {
                     <slot></slot>
                 </div>
             </div>
-        `;
-  }
-};
-
-// src/utils/clamp.ts
-var clamp = (min, max, value) => {
-  return Math.max(min, Math.min(max, value));
-};
-
-// src/app-slide.ts
-var SlideDataFactory = class {
-  constructor(header, content) {
-    this.header = header;
-    this.content = content;
-  }
-  header;
-  content;
-};
-var AppSlide = class extends BaseElement {
-  slideData = [
-    this.generateSlideData(
-      "Education",
-      "Graduate at ..."
-    ),
-    this.generateSlideData(
-      "Work Experience",
-      "Formerly worked at ..."
-    )
-  ];
-  generateSlideData(header, content) {
-    return new SlideDataFactory(header, content);
-  }
-  *slides() {
-    let slideIdx = 0;
-    for (const data of this.slideData) {
-      const element = document.createElement("div");
-      element.innerHTML = `
+        `}};var h=(r,t,i)=>Math.max(r,Math.min(t,i));var v=class{constructor(t,i){this.header=t;this.content=i}header;content},m=class extends n{slideData=[this.generateSlideData("Personal Information",`
+                <ul>
+                    <li>
+                        <span style="font-weight: bold;">Name: </span> 
+                        <span>Marjon Godito</span>
+                    </li>
+                    <li>
+                        <span style="font-weight: bold;">Name: </span> 
+                        <span>Marjon Godito</span>
+                    </li>
+                </ul>
+            `),this.generateSlideData("Education","Graduate in Bachelor of Science and Technology at Pamatasan ng Lungsod ng Valenzuela."),this.generateSlideData("Work Experience","Formerly worked at ...")];generateSlideData(t,i){return new v(t,i)}*slides(){let t=0;for(let i of this.slideData){let e=document.createElement("div");e.innerHTML=`
                 <div class="header">
-                    ${data.header}
+                    ${i.header}
                 </div>
                 <div class="body">
-                    ${data.content}
+                    ${i.content}
                 </div>
-            `;
-      element.id = `slide-${slideIdx}`;
-      element.classList.add("slide-item");
-      slideIdx++;
-      yield element;
-    }
-    return null;
-  }
-  get template() {
-    return `
+            `,e.id=`slide-${t}`,e.classList.add("slide-item"),t++,yield e}return null}get template(){return`
             <div id="slide-viewport">
                 <button class="btn-prev btn"></button>
                 <div id="slide-container"></div>
                 <button class="btn-next btn"></button>
             </div>
-        `;
-  }
-  get css() {
-    return `
+        `}get css(){return`
             :host {
                 display: block;
 
@@ -462,50 +331,4 @@ var AppSlide = class extends BaseElement {
             #slide-viewport .btn:active {
                 transform: translateY(-50%) scale(0.95);
             }
-        `;
-  }
-  onInitialize(element) {
-    const slideContainer = element.querySelector("#slide-container");
-    if (!slideContainer) return;
-    for (const slideItem of this.slides()) {
-      slideContainer.append(slideItem);
-    }
-    const slides = Array.from(
-      slideContainer.querySelectorAll(".slide-item")
-    );
-    let currentIdx = -1;
-    const showSlide = (idx) => {
-      if (slides.length === 0) return;
-      if (idx < 0) {
-        idx = slides.length - 1;
-      }
-      if (idx >= slides.length) {
-        idx = 0;
-      }
-      if (idx === currentIdx) return;
-      slides[currentIdx]?.removeAttribute("data-active");
-      currentIdx = idx;
-      slides[currentIdx]?.setAttribute("data-active", "");
-    };
-    const prevBtn = element.querySelector(".btn-prev");
-    const nextBtn = element.querySelector(".btn-next");
-    prevBtn?.addEventListener("click", () => {
-      const clampedIdx = clamp(0, slides.length - 1, currentIdx - 1);
-      console.log("Prev: ", clampedIdx);
-      showSlide(clampedIdx);
-    });
-    nextBtn?.addEventListener("click", () => {
-      const clampedIdx = clamp(0, slides.length - 1, currentIdx + 1);
-      console.log("Next: ", clampedIdx);
-      showSlide(clampedIdx);
-    });
-    showSlide(0);
-  }
-};
-
-// src/index.ts
-customElements.define("app-root", Approot);
-customElements.define("app-header", AppHeader);
-customElements.define("app-nav", AppNav);
-customElements.define("app-panel", AppPanel);
-customElements.define("app-slide", AppSlide);
+        `}onInitialize(t){let i=t.querySelector("#slide-container");if(!i)return;for(let o of this.slides())i.append(o);let e=Array.from(i.querySelectorAll(".slide-item")),a=-1,s=o=>{e.length!==0&&(o<0&&(o=e.length-1),o>=e.length&&(o=0),o!==a&&(e[a]?.removeAttribute("data-active"),a=o,e[a]?.setAttribute("data-active","")))},g=t.querySelector(".btn-prev"),b=t.querySelector(".btn-next");g?.addEventListener("click",()=>{let o=h(0,e.length-1,a-1);console.log("Prev: ",o),s(o)}),b?.addEventListener("click",()=>{let o=h(0,e.length-1,a+1);console.log("Next: ",o),s(o)}),s(0)}};customElements.define("app-root",d);customElements.define("app-header",l);customElements.define("app-nav",c);customElements.define("app-panel",p);customElements.define("app-slide",m);

@@ -1,62 +1,7 @@
-"use strict";
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-// src/app-root.ts
-var app_root_exports = {};
-__export(app_root_exports, {
-  Approot: () => Approot
-});
-module.exports = __toCommonJS(app_root_exports);
-
-// src/base.ts
-var BaseElement = class extends HTMLElement {
-  shadow;
-  constructor() {
-    super();
-    this.shadow = this.attachShadow({
-      mode: "open"
-    });
-  }
-  get css() {
-    return "";
-  }
-  get template() {
-    return "";
-  }
-  onInitialize(element) {
-  }
-  initialize() {
-    this.shadow.innerHTML = `
+"use strict";var a=Object.defineProperty;var d=Object.getOwnPropertyDescriptor;var c=Object.getOwnPropertyNames;var h=Object.prototype.hasOwnProperty;var l=(e,t)=>{for(var o in t)a(e,o,{get:t[o],enumerable:!0})},p=(e,t,o,n)=>{if(t&&typeof t=="object"||typeof t=="function")for(let i of c(t))!h.call(e,i)&&i!==o&&a(e,i,{get:()=>t[i],enumerable:!(n=d(t,i))||n.enumerable});return e};var m=e=>p(a({},"__esModule",{value:!0}),e);var g={};l(g,{Approot:()=>s});module.exports=m(g);var r=class extends HTMLElement{shadow;constructor(){super(),this.shadow=this.attachShadow({mode:"open"})}get css(){return""}get template(){return""}onInitialize(t){}initialize(){this.shadow.innerHTML=`
             <style>${this.css}</style>
             ${this.template}
-        `;
-    this.onInitialize(this.shadow);
-  }
-  connectedCallback() {
-    this.initialize();
-  }
-};
-
-// src/app-root.ts
-var Approot = class extends BaseElement {
-  get css() {
-    return `
+        `,this.onInitialize(this.shadow)}connectedCallback(){this.initialize()}};var s=class extends r{get css(){return`
             :host {
                 display: block;
                 width: 100%;
@@ -79,17 +24,8 @@ var Approot = class extends BaseElement {
                     padding: 8px;
                 }
             }
-        `;
-  }
-  get template() {
-    return `
+        `}get template(){return`
             <div class="root-container">
                 <slot></slot>
             </div>
-        `;
-  }
-};
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {
-  Approot
-});
+        `}};0&&(module.exports={Approot});
