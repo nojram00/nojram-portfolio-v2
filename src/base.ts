@@ -1,4 +1,4 @@
-export class BaseElement extends HTMLElement {
+export abstract class BaseElement extends HTMLElement {
     private shadow : ShadowRoot;
 
     constructor() {

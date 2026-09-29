@@ -23,44 +23,70 @@ __export(app_root_exports, {
   Approot: () => Approot
 });
 module.exports = __toCommonJS(app_root_exports);
-var Approot = class extends HTMLElement {
+
+// src/base.ts
+var BaseElement = class extends HTMLElement {
+  shadow;
   constructor() {
     super();
-    this.attachShadow({
+    this.shadow = this.attachShadow({
       mode: "open"
     });
-    if (this.shadowRoot) {
-      this.shadowRoot.innerHTML = `
-                <style>
-                    :host {
-                        display: block;
-                        width: 100%;
-                    }
-                    .root-container {
-                        width: 100%;
-                        min-height: 100vh;
-                        background: var(--color-bg);
-                        box-sizing: border-box;
-                    }
+  }
+  get css() {
+    return "";
+  }
+  get template() {
+    return "";
+  }
+  onInitialize(element) {
+  }
+  initialize() {
+    this.shadow.innerHTML = `
+            <style>${this.css}</style>
+            ${this.template}
+        `;
+    this.onInitialize(this.shadow);
+  }
+  connectedCallback() {
+    this.initialize();
+  }
+};
 
-                    @media (max-width: 768px) {
-                        .root-container {
-                            padding: 12px;
-                        }
-                    }
+// src/app-root.ts
+var Approot = class extends BaseElement {
+  get css() {
+    return `
+            :host {
+                display: block;
+                width: 100%;
+            }
+            .root-container {
+                width: 100%;
+                min-height: 100vh;
+                background: var(--color-bg);
+                box-sizing: border-box;
+            }
 
-                    @media (max-width: 480px) {
-                        .root-container {
-                            padding: 8px;
-                        }
-                    }
-                </style>
+            @media (max-width: 768px) {
+                .root-container {
+                    padding: 12px;
+                }
+            }
 
-                <div class="root-container">
-                    <slot></slot>
-                </div>
-            `;
-    }
+            @media (max-width: 480px) {
+                .root-container {
+                    padding: 8px;
+                }
+            }
+        `;
+  }
+  get template() {
+    return `
+            <div class="root-container">
+                <slot></slot>
+            </div>
+        `;
   }
 };
 // Annotate the CommonJS export names for ESM import in node:
